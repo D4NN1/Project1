@@ -1,0 +1,24 @@
+{% extends "layouts.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="form-group" style="margin-bottom: 20px;">
+                {{ form.title.label }}
+                {{ form.title(class="form-control", placeholder="Enter task title") }}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+
+        {% for task in tasks %}
+        <div>
+            <p>{{ task.title }} - {{ task.date_created.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+            <form method="POST" action="{{ url_for('delete_task', task_id=task.id) }}">
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

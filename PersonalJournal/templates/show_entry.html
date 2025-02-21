@@ -1,0 +1,21 @@
+{% extends "layouts.html" %}
+{% block content %}
+    <div class="entry">
+        <h2>{{ entry.title }}</h2>
+        <p>{{ entry.content }}</p>
+        <p>Posted on {{ entry.date_posted }}</p>
+        <form method="POST" action="{{ url_for('delete_entry', entry_id=entry.id) }}" style="display: inline;">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+    </div>
+    <div class="saved-entries">
+        {% for entry in entries %}
+            <div class="entry">
+                <h3>{{ entry.title }}</h3>
+                <p>{{ entry.content[:100] }}{% if entry.content|length > 100 %}...{% endif %}</p>
+                <small>{{ entry.date_posted.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+            </div>
+        {% endfor %}
+    </div>
+    
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends "layouts.html" %}
+{% block content %}
+<form action="{{ url_for('search') }}" method="get">
+    <input type="text" name="q" placeholder="Search users..." required>
+    <button type="submit">Search</button>
+</form>
+
+<h2>Your Friends</h2>
+<ul>
+    {% for friend in friends %}
+        <li>{{ friend.username }} <a href="{{ url_for('remove_friend', friend_id=friend.id) }}">Remove</a></li>
+    {% endfor %}
+</ul>
+{% endblock content %}

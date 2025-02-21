@@ -1,0 +1,9 @@
+lists = [i for i in range(1001) if "7" in str(i) or "3" in str(i) or "5" in str(i) or "1" in str(i)]
+print(len(lists))
+count = 0
+for i in range(1000):
+    if "7" in str(i) or "3" in str(i):
+        count+=1
+print(count)
+for i in range(10):
+    print(i)

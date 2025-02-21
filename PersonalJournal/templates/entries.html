@@ -1,0 +1,40 @@
+{% extends "layouts.html" %}
+{% block content %}
+    <h2>New Journal Entry</h2>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.title.label(class="form-control-label") }}
+            {{ form.title(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.content.label(class="form-control-label") }}
+            {{ form.content(class="form-control form-control-lg") }}
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+    <h2>Saved Entries</h2>
+    <div class="saved-entries">
+        {% for entry in entries %}
+            <div class="entry">
+                <h3><a href="{{ url_for('show_entry', entry_id=entry.id) }}">{{ entry.title }}</a></h3>
+                <p>{{ entry.content[:100] }}{% if entry.content|length > 100 %}...{% endif %}</p>
+                <small> Written on {{ entry.date_posted.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                <form method="POST" action="{{ url_for('delete_entry', entry_id=entry.id) }}" style="display: inline;">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+    <h2>Journal Entries for {{ date }}</h2>
+    {% for entry in entries %}
+        <div>
+            <h3>{{ entry.title }}</h3>
+            <p>{{ entry.content }}</p>
+        </div>
+    {% else %}
+        <p>No entries found for this date.</p>
+    {% endfor %}
+{% endblock content %}
