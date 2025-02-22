@@ -8,7 +8,7 @@
 <h2>Your Friends</h2>
 <ul>
     {% for friend in friends %}
-        <li>{{ friend.username }} <a href="{{ url_for('remove_friend', friend_id=friend.id) }}">Remove</a></li>
+        <li class="btn btn-outline-info">{{ friend.username }} <a href="{{ url_for('remove_friend', friend_id=friend.id) }}" class="list-group-item list-group-item-dark">Remove</a></li>
     {% endfor %}
 </ul>
 {% endblock content %}
